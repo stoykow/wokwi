@@ -2,52 +2,30 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 }
 
+void blinkSignal(int duration) {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(duration);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(200);
+}
+
 void loop() {
-  // S
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(100);
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(100);
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(100);
+  // SOS im Morsecode: kurz kurz kurz, lang lang lang, kurz kurz kurz
+  for (int i = 0; i < 3; i++) {
+    blinkSignal(200);
+  }
 
-  delay(500);
-  
-  // O
-  digitalWrite(LED_BUILTIN, HIGH);
   delay(400);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(100);
-  digitalWrite(LED_BUILTIN, HIGH);
+
+  for (int i = 0; i < 3; i++) {
+    blinkSignal(600);
+  }
+
   delay(400);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(100);
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(400);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(100);
 
-  delay(500);
+  for (int i = 0; i < 3; i++) {
+    blinkSignal(200);
+  }
 
-  // S
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(100);
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(100);
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(100);
-
-  delay(1000);
+  delay(1400);
 }
