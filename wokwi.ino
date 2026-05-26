@@ -16,6 +16,7 @@ void loop() {
   delay(100);
   digitalWrite(LED_BUILTIN, LOW);
   delay(500);
+  delay(500);
 
   // O
   digitalWrite(LED_BUILTIN, HIGH);
@@ -30,6 +31,7 @@ void loop() {
   delay(400);
   digitalWrite(LED_BUILTIN, LOW);
   delay(500);
+  delay(500);
 
   // S
   digitalWrite(LED_BUILTIN, HIGH);
@@ -43,5 +45,6 @@ void loop() {
   digitalWrite(LED_BUILTIN, HIGH);
   delay(100);
   digitalWrite(LED_BUILTIN, LOW);
+  delay(500);
   delay(500);
 }
