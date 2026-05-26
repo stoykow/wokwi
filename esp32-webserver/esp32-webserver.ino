@@ -5,6 +5,7 @@
 
 const int ledPin = 2;
 bool ledOn = false;
+unsigned long lastIpPrint = 0;
 
 WebServer server(80);
 
@@ -98,4 +99,10 @@ void loop() {
   }
 
   server.handleClient();
+
+  if (millis() - lastIpPrint > 5000) {
+    lastIpPrint = millis();
+    Serial.print("Browser-URL: http://");
+    Serial.println(WiFi.localIP());
+  }
 }
