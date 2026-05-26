@@ -11,11 +11,22 @@ Dieses Repository enthält getrennte Arduino-Projekte für die Simulation mit Wo
 
 Jeder Projektordner enthält eine eigene `.ino`-Datei, eine eigene `wokwi.toml` und eine eigene `diagram.json`. Dadurch kannst du den jeweiligen Unterordner auch einzeln als Wokwi-Projekt öffnen.
 
+## WLAN in Wokwi
+
+Für die Wokwi-Simulation muss das WLAN exakt so heißen:
+
+```cpp
+const char* WIFI_SSID = "Wokwi-GUEST";
+const char* WIFI_PASSWORD = "";
+```
+
+Auf echter ESP32-Hardware ersetzt du diese Werte in der jeweiligen lokalen `secrets.h` durch dein echtes WLAN.
+
 ## ESP32 und MQTT
 
 Der ESP32 im Ordner `esp32/` verbindet sich mit deinem WLAN und sendet per MQTT an einen Broker im selben Netzwerk.
 
-Vor dem Kompilieren brauchst du lokal eine Datei `esp32/secrets.h`. Kopiere dafür `esp32/secrets.example.h` und trage deine echten Daten ein:
+Vor dem Kompilieren brauchst du lokal eine Datei `esp32/secrets.h`. Kopiere dafür `esp32/secrets.example.h` und trage bei echter Hardware deine echten Daten ein:
 
 ```cpp
 const char* WIFI_SSID = "DEIN_WLAN";
@@ -38,12 +49,7 @@ Verwendete Topics:
 
 Der ESP32 im Ordner `esp32-webserver/` verbindet sich mit deinem WLAN und startet einen Webserver auf Port `80`. Im Browser kannst du dann die IP-Adresse des ESP32 öffnen und die eingebaute LED ein- oder ausschalten.
 
-Vor dem Kompilieren brauchst du lokal eine Datei `esp32-webserver/secrets.h`. Kopiere dafür `esp32-webserver/secrets.example.h` und trage deine WLAN-Daten ein:
-
-```cpp
-const char* WIFI_SSID = "DEIN_WLAN";
-const char* WIFI_PASSWORD = "DEIN_WLAN_PASSWORT";
-```
+Vor dem Kompilieren brauchst du lokal eine Datei `esp32-webserver/secrets.h`. Kopiere dafür `esp32-webserver/secrets.example.h` und trage bei echter Hardware deine WLAN-Daten ein.
 
 Die IP-Adresse wird nach dem WLAN-Verbindungsaufbau im seriellen Monitor ausgegeben.
 

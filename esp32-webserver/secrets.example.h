@@ -1,4 +1,4 @@
 #pragma once
 
-const char* WIFI_SSID = "DEIN_WLAN";
-const char* WIFI_PASSWORD = "DEIN_WLAN_PASSWORT";
+const char* WIFI_SSID = "Wokwi-GUEST";
+const char* WIFI_PASSWORD = "";
