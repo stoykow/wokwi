@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Arduino: Build for Wokwi",
+      "label": "Arduino: Build Blink for Wokwi",
       "type": "shell",
       "command": "arduino-cli",
       "args": [
@@ -10,8 +10,23 @@
         "--fqbn",
         "arduino:avr:uno",
         "--output-dir",
-        "build",
-        "."
+        "blink/build",
+        "blink"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Arduino: Build SOS for Wokwi",
+      "type": "shell",
+      "command": "arduino-cli",
+      "args": [
+        "compile",
+        "--fqbn",
+        "arduino:avr:uno",
+        "--output-dir",
+        "sos/build",
+        "sos"
       ],
       "group": {
         "kind": "build",
@@ -28,7 +43,7 @@
         "-ExecutionPolicy",
         "Bypass",
         "-Command",
-        "$action = { arduino-cli compile --fqbn arduino:avr:uno --output-dir build . }; & $action; $watcher = New-Object IO.FileSystemWatcher (Get-Location), '*.ino'; $watcher.EnableRaisingEvents = $true; Register-ObjectEvent $watcher Changed -Action $action | Out-Null; Register-ObjectEvent $watcher Created -Action $action | Out-Null; Register-ObjectEvent $watcher Renamed -Action $action | Out-Null; while ($true) { Start-Sleep -Seconds 1 }"
+        "$action = { arduino-cli compile --fqbn arduino:avr:uno --output-dir sos/build sos }; & $action; $watcher = New-Object IO.FileSystemWatcher (Join-Path (Get-Location) 'sos'), '*.ino'; $watcher.EnableRaisingEvents = $true; Register-ObjectEvent $watcher Changed -Action $action | Out-Null; Register-ObjectEvent $watcher Created -Action $action | Out-Null; Register-ObjectEvent $watcher Renamed -Action $action | Out-Null; while ($true) { Start-Sleep -Seconds 1 }"
       ],
       "isBackground": true,
       "problemMatcher": []

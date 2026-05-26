@@ -12,17 +12,15 @@ void blinkSignal(int duration) {
 void loop() {
   // SOS im Morsecode: kurz kurz kurz, lang lang lang, kurz kurz kurz
   for (int i = 0; i < 3; i++) {
-    blinkSignal(200);
+    blinkSignal(100);
   }
 
-
   for (int i = 0; i < 3; i++) {
-    blinkSignal(600);
+    blinkSignal(400);
   }
 
-
   for (int i = 0; i < 3; i++) {
-    blinkSignal(200);
+    blinkSignal(100);
   }
 
   delay(1400);

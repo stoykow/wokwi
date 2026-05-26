@@ -1,36 +1,39 @@
-# Wokwi Arduino Uno Projekt
+# Wokwi Arduino Uno Projekte
 
-Dieses Projekt enthält einen einfachen Arduino-Uno-Sketch für die Simulation mit Wokwi in Visual Studio Code.
+Dieses Repository enthält zwei getrennte Arduino-Uno-Projekte für die Simulation mit Wokwi in Visual Studio Code.
 
-## Dateien
+## Projekte
 
-- `wokwi.ino`: Arduino-Programm
-- `diagram.json`: Schaltung für die Wokwi-Simulation
-- `wokwi.toml`: Wokwi-Konfiguration mit den Pfaden zur kompilierten Firmware
-- `build/`: kompilierte Dateien, die Wokwi lädt
+- `blink/`: einfacher Blink-Sketch
+- `sos/`: SOS-Sketch im Morsecode
 
-## Programm
-
-Der aktuelle Sketch lässt die eingebaute LED des Arduino Uno auf Pin 13 dreimal kurz blinken. Das entspricht dem Buchstaben `S` im Morsecode.
+Jeder Projektordner enthält eine eigene `.ino`-Datei, eine eigene `wokwi.toml` und eine eigene `diagram.json`. Dadurch kannst du den jeweiligen Unterordner auch einzeln als Wokwi-Projekt öffnen.
 
 ## Kompilieren
 
-Wokwi für VS Code lädt nicht direkt die `.ino`-Datei, sondern die kompilierte Firmware aus dem Ordner `build/`. Nach Änderungen an `wokwi.ino` muss der Sketch deshalb neu kompiliert werden:
+Blink:
 
 ```powershell
-arduino-cli compile --fqbn arduino:avr:uno --output-dir build .
+arduino-cli compile --fqbn arduino:avr:uno --output-dir blink/build blink
 ```
 
-Danach kann die Simulation in Wokwi neu gestartet werden.
+SOS:
+
+```powershell
+arduino-cli compile --fqbn arduino:avr:uno --output-dir sos/build sos
+```
+
+Wokwi lädt die kompilierte Firmware aus dem jeweiligen `build/`-Ordner des Projekts.
 
 ## Automatisch bauen
 
-In VS Code ist ein Build-Task eingerichtet:
+In VS Code sind Build-Tasks eingerichtet:
 
-- `Arduino: Build for Wokwi`: kompiliert einmalig
-- `Arduino: Watch and Build for Wokwi`: kompiliert automatisch neu, wenn sich eine `.ino`-Datei ändert
+- `Arduino: Build Blink for Wokwi`: kompiliert `blink/blink.ino`
+- `Arduino: Build SOS for Wokwi`: kompiliert `sos/sos.ino`
+- `Arduino: Watch and Build for Wokwi`: kompiliert `sos/sos.ino` automatisch neu, wenn sich die Datei ändert
 
-Den normalen Build-Task kannst du mit `Strg+Shift+B` starten.
+Der Standard-Build-Task ist aktuell der SOS-Sketch und kann mit `Strg+Shift+B` gestartet werden.
 
 ## Voraussetzungen
 
