@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Arduino: Build for Wokwi",
+      "type": "shell",
+      "command": "arduino-cli",
+      "args": [
+        "compile",
+        "--fqbn",
+        "arduino:avr:uno",
+        "--output-dir",
+        "build",
+        "."
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Arduino: Watch and Build for Wokwi",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$action = { arduino-cli compile --fqbn arduino:avr:uno --output-dir build . }; & $action; $watcher = New-Object IO.FileSystemWatcher (Get-Location), '*.ino'; $watcher.EnableRaisingEvents = $true; Register-ObjectEvent $watcher Changed -Action $action | Out-Null; Register-ObjectEvent $watcher Created -Action $action | Out-Null; Register-ObjectEvent $watcher Renamed -Action $action | Out-Null; while ($true) { Start-Sleep -Seconds 1 }"
+      ],
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}
