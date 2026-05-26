@@ -35,6 +35,21 @@
       "problemMatcher": []
     },
     {
+      "label": "Arduino: Build ESP32 for Wokwi",
+      "type": "shell",
+      "command": "arduino-cli",
+      "args": [
+        "compile",
+        "--fqbn",
+        "esp32:esp32:esp32",
+        "--output-dir",
+        "esp32/build",
+        "esp32"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
       "label": "Arduino: Watch and Build for Wokwi",
       "type": "shell",
       "command": "powershell",
