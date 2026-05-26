@@ -11,6 +11,37 @@ Dieses Repository enthält getrennte Arduino-Projekte für die Simulation mit Wo
 
 Jeder Projektordner enthält eine eigene `.ino`-Datei, eine eigene `wokwi.toml` und eine eigene `diagram.json`. Dadurch kannst du den jeweiligen Unterordner auch einzeln als Wokwi-Projekt öffnen.
 
+## Wokwi Gateway
+
+Für ESP32-Netzwerkprojekte ist `wokwigw` eingerichtet:
+
+https://github.com/wokwi/wokwigw
+
+Die ESP32-`wokwi.toml`-Dateien enthalten dafür:
+
+```toml
+[net]
+gateway = "ws://localhost:9011"
+```
+
+Starte vor der Simulation den VS-Code-Task:
+
+```text
+Wokwi: Start Gateway for ESP32 Webserver
+```
+
+Der Task startet `wokwigw` und leitet zusätzlich den simulierten ESP32-Webserver weiter:
+
+```text
+http://localhost:8080 -> 10.13.37.2:80
+```
+
+Danach kannst du den Webserver im Browser über diese Adresse öffnen:
+
+```text
+http://localhost:8080
+```
+
 ## WLAN in Wokwi
 
 Für die Wokwi-Simulation muss das WLAN exakt so heißen:
@@ -24,9 +55,18 @@ Auf echter ESP32-Hardware ersetzt du diese Werte in der jeweiligen lokalen `secr
 
 ## ESP32 und MQTT
 
-Der ESP32 im Ordner `esp32/` verbindet sich mit deinem WLAN und sendet per MQTT an einen Broker im selben Netzwerk.
+Der ESP32 im Ordner `esp32/` verbindet sich mit WLAN und sendet per MQTT.
 
-Vor dem Kompilieren brauchst du lokal eine Datei `esp32/secrets.h`. Kopiere dafür `esp32/secrets.example.h` und trage bei echter Hardware deine echten Daten ein:
+Mit `wokwigw` kann die Simulation Dienste auf deinem Rechner über diesen Host erreichen:
+
+```cpp
+const char* MQTT_HOST = "host.wokwi.internal";
+const int MQTT_PORT = 1883;
+```
+
+Das funktioniert, wenn auf deinem Rechner ein MQTT-Broker auf Port `1883` läuft, zum Beispiel Mosquitto. Wenn dein Broker auf einem anderen Gerät im LAN läuft, kannst du stattdessen dessen IP-Adresse eintragen.
+
+Für echte ESP32-Hardware trägst du in `esp32/secrets.h` dein echtes WLAN und die IP-Adresse deines MQTT-Brokers ein:
 
 ```cpp
 const char* WIFI_SSID = "DEIN_WLAN";
@@ -47,25 +87,17 @@ Verwendete Topics:
 
 ## ESP32 Webserver
 
-Der ESP32 im Ordner `esp32-webserver/` verbindet sich mit deinem WLAN und startet einen Webserver auf Port `80`. Im Browser kannst du dann die IP-Adresse des ESP32 öffnen und die eingebaute LED ein- oder ausschalten.
+Der ESP32 im Ordner `esp32-webserver/` verbindet sich mit WLAN und startet einen Webserver auf Port `80`.
 
-Vor dem Kompilieren brauchst du lokal eine Datei `esp32-webserver/secrets.h`. Kopiere dafür `esp32-webserver/secrets.example.h` und trage bei echter Hardware deine WLAN-Daten ein.
-
-Die IP-Adresse wird nach dem WLAN-Verbindungsaufbau im seriellen Monitor ausgegeben.
-
-Für Wokwi in VS Code ist `wokwigw` eingerichtet. Starte zuerst den Task:
-
-```text
-Wokwi: Start Gateway for ESP32 Webserver
-```
-
-Danach die Wokwi-Simulation starten und im Browser öffnen:
+In Wokwi mit gestartetem Gateway öffnest du:
 
 ```text
 http://localhost:8080
 ```
 
-Der Task leitet `localhost:8080` auf Port `80` des simulierten ESP32 weiter.
+Auf echter Hardware öffnest du die IP-Adresse des ESP32 im Browser. Die IP-Adresse wird nach dem WLAN-Verbindungsaufbau im seriellen Monitor ausgegeben.
+
+Vor dem Kompilieren brauchst du lokal eine Datei `esp32-webserver/secrets.h`. Kopiere dafür `esp32-webserver/secrets.example.h` und trage bei echter Hardware deine WLAN-Daten ein.
 
 ## Kompilieren
 
@@ -116,3 +148,4 @@ Der Standard-Build-Task ist aktuell der SOS-Sketch und kann mit `Strg+Shift+B` g
 - installierter Arduino-AVR-Core für `arduino:avr:uno`
 - installierter ESP32-Core für `esp32:esp32:esp32`
 - installierte Arduino-Library `PubSubClient` für das MQTT-Projekt
+- `wokwigw` für lokale Wokwi-Netzwerkverbindungen
