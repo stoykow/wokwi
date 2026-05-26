@@ -53,6 +53,20 @@ Vor dem Kompilieren brauchst du lokal eine Datei `esp32-webserver/secrets.h`. Ko
 
 Die IP-Adresse wird nach dem WLAN-Verbindungsaufbau im seriellen Monitor ausgegeben.
 
+Für Wokwi in VS Code ist `wokwigw` eingerichtet. Starte zuerst den Task:
+
+```text
+Wokwi: Start Gateway for ESP32 Webserver
+```
+
+Danach die Wokwi-Simulation starten und im Browser öffnen:
+
+```text
+http://localhost:8080
+```
+
+Der Task leitet `localhost:8080` auf Port `80` des simulierten ESP32 weiter.
+
 ## Kompilieren
 
 Blink:
@@ -89,6 +103,7 @@ In VS Code sind Build-Tasks eingerichtet:
 - `Arduino: Build SOS for Wokwi`: kompiliert `sos/sos.ino`
 - `Arduino: Build ESP32 for Wokwi`: kompiliert `esp32/esp32.ino`
 - `Arduino: Build ESP32 Webserver for Wokwi`: kompiliert `esp32-webserver/esp32-webserver.ino`
+- `Wokwi: Start Gateway for ESP32 Webserver`: startet `wokwigw` mit Port-Forwarding auf `localhost:8080`
 - `Arduino: Watch and Build for Wokwi`: kompiliert `sos/sos.ino` automatisch neu, wenn sich die Datei ändert
 
 Der Standard-Build-Task ist aktuell der SOS-Sketch und kann mit `Strg+Shift+B` gestartet werden.

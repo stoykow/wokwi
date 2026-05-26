@@ -65,6 +65,17 @@
       "problemMatcher": []
     },
     {
+      "label": "Wokwi: Start Gateway for ESP32 Webserver",
+      "type": "shell",
+      "command": "${workspaceFolder}\\.tools\\wokwigw\\wokwigw.exe",
+      "args": [
+        "--forward",
+        "8080:10.13.37.2:80"
+      ],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
       "label": "Arduino: Watch and Build for Wokwi",
       "type": "shell",
       "command": "powershell",
