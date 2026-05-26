@@ -15,13 +15,11 @@ void loop() {
     blinkSignal(200);
   }
 
-  delay(400);
 
   for (int i = 0; i < 3; i++) {
     blinkSignal(600);
   }
 
-  delay(400);
 
   for (int i = 0; i < 3; i++) {
     blinkSignal(200);
