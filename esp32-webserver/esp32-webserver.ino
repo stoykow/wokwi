@@ -59,16 +59,26 @@ void handleOff() {
 }
 
 void connectWiFi() {
+  Serial.print("Verbinde mit WLAN ");
+  Serial.print(WIFI_SSID);
+
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
   while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
     delay(500);
   }
+
+  Serial.println();
 }
 
 void setup() {
   Serial.begin(115200);
+  delay(1000);
+  Serial.println();
+  Serial.println("ESP32 Webserver startet");
+
   pinMode(ledPin, OUTPUT);
   setLed(false);
 
