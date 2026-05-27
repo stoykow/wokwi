@@ -2,6 +2,42 @@
 
 Dieses Repository enthält getrennte Arduino-Projekte für die Simulation mit Wokwi in Visual Studio Code.
 
+## Projekt in VS Code öffnen
+
+Du brauchst keinen eigenen GitHub- oder GitLab-Account, um dieses öffentliche Repository zu nutzen. Zum Herunterladen reicht Git über HTTPS.
+
+Voraussetzungen:
+
+- Visual Studio Code
+- Git für Windows
+- Wokwi-Erweiterung für Visual Studio Code
+- Internetzugang für die Setup-Skripte
+
+Repository klonen:
+
+```powershell
+cd C:\Users\DEIN_NAME\VSC
+git clone https://github.com/stoykow/wokwi.git
+cd wokwi
+code .
+```
+
+Falls `code .` nicht funktioniert, öffne Visual Studio Code und wähle **File > Open Folder...**. Danach den Ordner `wokwi` auswählen.
+
+Nach dem Öffnen in VS Code einmalig ausführen:
+
+```powershell
+.\scripts\setup-arduino.ps1
+.\scripts\install-wokwigw.ps1
+```
+
+Alternativ kannst du in VS Code die Tasks starten:
+
+- `Arduino: Setup CLI, Cores and Libraries`
+- `Wokwi: Install Gateway`
+
+Danach funktionieren die Build-Tasks ohne globale `arduino-cli`-Installation im `PATH`.
+
 ## Setup auf einem neuen Rechner
 
 Die benötigten Programme werden projektlokal nach `.tools/` installiert. Dieser Ordner wird von Git ignoriert.
@@ -17,13 +53,6 @@ Wokwi Gateway installieren:
 ```powershell
 .\scripts\install-wokwigw.ps1
 ```
-
-Alternativ kannst du in VS Code die Tasks starten:
-
-- `Arduino: Setup CLI, Cores and Libraries`
-- `Wokwi: Install Gateway`
-
-Danach funktionieren die Build-Tasks ohne globale `arduino-cli`-Installation im `PATH`.
 
 ## Projekte
 
@@ -165,9 +194,3 @@ In VS Code sind Build-Tasks eingerichtet:
 - `Arduino: Watch and Build for Wokwi`: kompiliert `sos/sos.ino` automatisch neu, wenn sich die Datei ändert
 
 Der Standard-Build-Task ist aktuell der SOS-Sketch und kann mit `Strg+Shift+B` gestartet werden.
-
-## Voraussetzungen
-
-- Visual Studio Code
-- Wokwi-Erweiterung für VS Code
-- Internetzugang für die Setup-Skripte
