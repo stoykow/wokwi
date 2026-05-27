@@ -2,6 +2,29 @@
 
 Dieses Repository enthält getrennte Arduino-Projekte für die Simulation mit Wokwi in Visual Studio Code.
 
+## Setup auf einem neuen Rechner
+
+Die benötigten Programme werden projektlokal nach `.tools/` installiert. Dieser Ordner wird von Git ignoriert.
+
+Arduino CLI, Board-Cores und Bibliotheken installieren:
+
+```powershell
+.\scripts\setup-arduino.ps1
+```
+
+Wokwi Gateway installieren:
+
+```powershell
+.\scripts\install-wokwigw.ps1
+```
+
+Alternativ kannst du in VS Code die Tasks starten:
+
+- `Arduino: Setup CLI, Cores and Libraries`
+- `Wokwi: Install Gateway`
+
+Danach funktionieren die Build-Tasks ohne globale `arduino-cli`-Installation im `PATH`.
+
 ## Projekte
 
 - `blink/`: einfacher Blink-Sketch für Arduino Uno
@@ -16,18 +39,6 @@ Jeder Projektordner enthält eine eigene `.ino`-Datei, eine eigene `wokwi.toml` 
 Für ESP32-Netzwerkprojekte wird `wokwigw` verwendet:
 
 https://github.com/wokwi/wokwigw
-
-Die Binärdatei liegt lokal unter `.tools/` und wird nicht ins Git-Repository übernommen. Auf einem neuen Rechner installierst du sie mit:
-
-```powershell
-.\scripts\install-wokwigw.ps1
-```
-
-Alternativ kannst du in VS Code den Task starten:
-
-```text
-Wokwi: Install Gateway
-```
 
 Die ESP32-`wokwi.toml`-Dateien enthalten:
 
@@ -116,25 +127,25 @@ Vor dem Kompilieren brauchst du lokal eine Datei `esp32-webserver/secrets.h`. Ko
 Blink:
 
 ```powershell
-arduino-cli compile --fqbn arduino:avr:uno --output-dir blink/build blink
+.\.tools\arduino-cli\arduino-cli.exe compile --fqbn arduino:avr:uno --output-dir blink/build blink
 ```
 
 SOS:
 
 ```powershell
-arduino-cli compile --fqbn arduino:avr:uno --output-dir sos/build sos
+.\.tools\arduino-cli\arduino-cli.exe compile --fqbn arduino:avr:uno --output-dir sos/build sos
 ```
 
 ESP32 MQTT:
 
 ```powershell
-arduino-cli compile --fqbn esp32:esp32:esp32 --output-dir esp32/build esp32
+.\.tools\arduino-cli\arduino-cli.exe compile --fqbn esp32:esp32:esp32 --output-dir esp32/build esp32
 ```
 
 ESP32 Webserver:
 
 ```powershell
-arduino-cli compile --fqbn esp32:esp32:esp32 --output-dir esp32-webserver/build esp32-webserver
+.\.tools\arduino-cli\arduino-cli.exe compile --fqbn esp32:esp32:esp32 --output-dir esp32-webserver/build esp32-webserver
 ```
 
 Wokwi lädt die kompilierte Firmware aus dem jeweiligen `build/`-Ordner des Projekts.
@@ -143,6 +154,8 @@ Wokwi lädt die kompilierte Firmware aus dem jeweiligen `build/`-Ordner des Proj
 
 In VS Code sind Build-Tasks eingerichtet:
 
+- `Arduino: Install CLI`: lädt `arduino-cli` nach `.tools/`
+- `Arduino: Setup CLI, Cores and Libraries`: installiert `arduino-cli`, Board-Cores und `PubSubClient`
 - `Arduino: Build Blink for Wokwi`: kompiliert `blink/blink.ino`
 - `Arduino: Build SOS for Wokwi`: kompiliert `sos/sos.ino`
 - `Arduino: Build ESP32 for Wokwi`: kompiliert `esp32/esp32.ino`
@@ -157,8 +170,4 @@ Der Standard-Build-Task ist aktuell der SOS-Sketch und kann mit `Strg+Shift+B` g
 
 - Visual Studio Code
 - Wokwi-Erweiterung für VS Code
-- Arduino CLI
-- installierter Arduino-AVR-Core für `arduino:avr:uno`
-- installierter ESP32-Core für `esp32:esp32:esp32`
-- installierte Arduino-Library `PubSubClient` für das MQTT-Projekt
-- `wokwigw` für lokale Wokwi-Netzwerkverbindungen
+- Internetzugang für die Setup-Skripte
