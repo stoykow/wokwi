@@ -65,6 +65,19 @@
       "problemMatcher": []
     },
     {
+      "label": "Wokwi: Install Gateway",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\install-wokwigw.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
       "label": "Wokwi: Start Gateway for ESP32 Webserver",
       "type": "shell",
       "command": "${workspaceFolder}\\.tools\\wokwigw\\wokwigw.exe",

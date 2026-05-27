@@ -13,11 +13,23 @@ Jeder Projektordner enthält eine eigene `.ino`-Datei, eine eigene `wokwi.toml` 
 
 ## Wokwi Gateway
 
-Für ESP32-Netzwerkprojekte ist `wokwigw` eingerichtet:
+Für ESP32-Netzwerkprojekte wird `wokwigw` verwendet:
 
 https://github.com/wokwi/wokwigw
 
-Die ESP32-`wokwi.toml`-Dateien enthalten dafür:
+Die Binärdatei liegt lokal unter `.tools/` und wird nicht ins Git-Repository übernommen. Auf einem neuen Rechner installierst du sie mit:
+
+```powershell
+.\scripts\install-wokwigw.ps1
+```
+
+Alternativ kannst du in VS Code den Task starten:
+
+```text
+Wokwi: Install Gateway
+```
+
+Die ESP32-`wokwi.toml`-Dateien enthalten:
 
 ```toml
 [net]
@@ -36,7 +48,7 @@ Der Task startet `wokwigw` und leitet zusätzlich den simulierten ESP32-Webserve
 http://localhost:8080 -> 10.13.37.2:80
 ```
 
-Danach kannst du den Webserver im Browser über diese Adresse öffnen:
+Danach kannst du den Webserver im Browser öffnen:
 
 ```text
 http://localhost:8080
@@ -135,6 +147,7 @@ In VS Code sind Build-Tasks eingerichtet:
 - `Arduino: Build SOS for Wokwi`: kompiliert `sos/sos.ino`
 - `Arduino: Build ESP32 for Wokwi`: kompiliert `esp32/esp32.ino`
 - `Arduino: Build ESP32 Webserver for Wokwi`: kompiliert `esp32-webserver/esp32-webserver.ino`
+- `Wokwi: Install Gateway`: lädt `wokwigw` nach `.tools/`
 - `Wokwi: Start Gateway for ESP32 Webserver`: startet `wokwigw` mit Port-Forwarding auf `localhost:8080`
 - `Arduino: Watch and Build for Wokwi`: kompiliert `sos/sos.ino` automatisch neu, wenn sich die Datei ändert
 
